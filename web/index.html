@@ -1,0 +1,157 @@
+<!-- Jason Stys: semantic local-only synthetic identity/access assurance viewer and help. -->
+<!-- BEGIN CODE MAP (generated; npm run code-map)
+ * control: main — line 31
+ * control: summary — line 72
+ * control: search — line 77
+ * control: verdict — line 85
+ * control: status — line 93
+ * control: rows — line 119
+END CODE MAP -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Identity Assurance · Jason Stys</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to evidence</a>
+    <header>
+      <strong>CIAL <span>IDENTITY ASSURANCE</span></strong>
+      <nav aria-label="Project links">
+        <a href="https://github.com/JasonStys/cloud-identity-access-lab"
+          >Source &amp; reports</a
+        ><a href="https://www.linkedin.com/in/jason-stys-31b30b351/"
+          >Contact Jason Stys</a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <p class="eyebrow">TRUST THE SIGNATURE. VERIFY THE BOUNDARY.</p>
+      <h1>Identity is a claim.<br />Access needs evidence.</h1>
+      <p class="intro">
+        Built by Jason Stys. Trace signed credentials through least-privilege
+        policy, MFA freshness, temporary grants and revocation. Every displayed
+        decision was evaluated by the native policy engine.
+      </p>
+      <aside>
+        Owner-local synthetic lab. No real accounts, MFA enrollment, cloud
+        credentials or resources. Local issuer fixtures test integration
+        semantics—not live AWS, Azure or GitHub authentication.
+      </aside>
+      <section class="cards" aria-label="Assurance layers">
+        <article>
+          <p class="eyebrow">01 / VERIFY</p>
+          <h2>Pin the trust.</h2>
+          <p>
+            Ed25519 signatures, exact issuer and audience, fixed algorithm,
+            expiry and not-before checks. No remote key URL from token headers.
+          </p>
+        </article>
+        <article>
+          <p class="eyebrow">02 / AUTHORIZE</p>
+          <h2>Keep privilege narrow.</h2>
+          <p>
+            Authoritative tenant and action ceilings. Human writes require fresh
+            issuer-attested MFA. Workloads use one exact registered subject.
+          </p>
+        </article>
+        <article>
+          <p class="eyebrow">03 / END ACCESS</p>
+          <h2>Time is a boundary.</h2>
+          <p>
+            Temporary credentials, immediate local revocation, subject
+            disablement and two-approver emergency grants with exclusive expiry.
+          </p>
+        </article>
+      </section>
+      <section class="evidence">
+        <h2>Observed access matrix</h2>
+        <p id="summary">Validating actual evidence…</p>
+        <div class="filters">
+          <div class="filter">
+            <label for="search">Search scenarios</label
+            ><input
+              id="search"
+              type="search"
+              maxlength="200"
+              placeholder="Principal, resource, MFA, revocation…"
+            />
+          </div>
+          <div class="filter">
+            <label for="verdict">Observed decision</label
+            ><select id="verdict">
+              <option value="all">All scenarios</option>
+              <option value="allow">Allowed access</option>
+              <option value="deny">Denied access</option>
+              <option value="failed">Failed regressions</option>
+            </select>
+          </div>
+        </div>
+        <p id="status" role="status" aria-live="polite">
+          Loading local evidence…
+        </p>
+        <div
+          class="table-wrap"
+          tabindex="0"
+          role="region"
+          aria-label="Scrollable access decision evidence"
+        >
+          <table>
+            <caption>
+              Expected versus observed. A denied request passes when denial was
+              expected.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Scenario</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Access</th>
+                <th scope="col">Expected</th>
+                <th scope="col">Observed</th>
+                <th scope="col">Regression</th>
+                <th scope="col">Reason</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p class="exports">
+          <a href="/evidence.json" download>Download sanitized JSON</a
+          ><a href="/evidence.html" download>Download inert HTML report</a>
+        </p>
+      </section>
+      <details>
+        <summary>Help, scope and real-provider integration</summary>
+        <p>
+          Search filters evidence only; it does not change any permission.
+          Allowed/Denied describes the observed access decision, while Pass/FAIL
+          compares it with the expected test outcome. Tokens and signing keys
+          are never displayed or downloaded.
+        </p>
+        <p>
+          The Python adapter actually verifies synthetic signed JWTs and calls
+          native OPA. MFA evidence is an issuer assertion; this lab does not
+          perform a second-factor challenge. The provider-free Terraform module
+          generates AWS-shaped IAM documents and is tested with native plan-only
+          tests. No AWS IAM Simulator or deployment was performed.
+        </p>
+        <p>
+          Before real integration, use an approved identity provider, validate
+          its access-token profile and pinned issuer/JWKS lifecycle, enroll
+          strong MFA, establish durable distributed revocation and clock
+          discipline, review IAM policy interactions and require trusted HTTPS.
+          Read the README, contracts, threat model and validation report. Do not
+          enter private credentials here.
+        </p>
+      </details>
+    </main>
+    <footer>
+      Created by Jason Stys · Defensive synthetic evidence · No ads, analytics
+      or third-party UI scripts
+    </footer>
+  </body>
+</html>

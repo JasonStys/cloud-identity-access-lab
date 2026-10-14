@@ -1,0 +1,22 @@
+{
+  "lab": {
+    "synthetic": true,
+    "principals": {
+      "engineer-alpha": {"kind": "human", "tenant": "alpha", "actions": ["read", "publish"]},
+      "reader-beta": {"kind": "human", "tenant": "beta", "actions": ["read"]},
+      "responder-alpha": {"kind": "human", "tenant": "alpha", "actions": ["read", "rotate"]},
+      "repo:synthetic-org@101/synthetic-release@202:ref:refs/heads/main": {"kind": "workload", "tenant": "alpha", "actions": ["publish"]}
+    },
+    "resources": {
+      "alpha-docs": {"tenant": "alpha", "actions": ["read"]},
+      "alpha-artifacts": {"tenant": "alpha", "actions": ["read", "publish"]},
+      "beta-docs": {"tenant": "beta", "actions": ["read"]},
+      "alpha-keys": {"tenant": "alpha", "actions": ["rotate"]}
+    },
+    "emergency": {
+      "subject": "responder-alpha", "action": "rotate", "resource": "alpha-keys",
+      "starts": 2000000000, "expires": 2000000060,
+      "approvers": ["approver-one", "approver-two"]
+    }
+  }
+}

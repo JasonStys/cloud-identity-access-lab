@@ -1,0 +1,25 @@
+[project]
+name = "cloud-identity-access-lab"
+version = "1.0.0"
+description = "Synthetic signed-identity and real policy-engine assurance by Jason Stys"
+requires-python = ">=3.12"
+dependencies = ["PyJWT==2.15.1", "cryptography==50.0.2"]
+[tool.ruff]
+target-version = "py312"
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+[tool.mypy]
+strict = true
+python_version = "3.12"
+files = ["cial"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+filterwarnings = ["error"]
+[tool.coverage.run]
+branch = true
+source = ["cial"]
+[tool.coverage.report]
+fail_under = 95
+show_missing = true

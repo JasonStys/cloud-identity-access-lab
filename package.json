@@ -1,0 +1,17 @@
+{
+  "name":"cloud-identity-access-lab","version":"1.0.0","private":true,"type":"module",
+  "description":"Synthetic identity/access evidence viewer by Jason Stys",
+  "engines":{"node":">=24"},
+  "scripts":{
+    "build":"tsc && node scripts/build.mjs",
+    "typecheck":"tsc --noEmit",
+    "test:unit":"node --test tests/ui/*.test.mjs",
+    "test:e2e":"playwright test",
+    "format":"prettier --write web scripts/*.mjs tests/**/*.mjs playwright.config.mjs",
+    "format:check":"prettier --check web scripts/*.mjs tests/**/*.mjs playwright.config.mjs",
+    "code-map":"node scripts/ts-map.mjs",
+    "code-map:check":"node scripts/ts-map.mjs --check",
+    "audit":"npm audit --audit-level=low"
+  },
+  "devDependencies":{"@axe-core/playwright":"4.13.0","@playwright/test":"1.63.0","prettier":"3.9.10","typescript":"6.0.3"}
+}

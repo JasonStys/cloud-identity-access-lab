@@ -1,0 +1,69 @@
+# Jason Stys: full supported-language security-extended analysis; no CodeQL database artifact upload.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: name — line 37
+# parameter: on — line 38
+# parameter: push — line 39
+# parameter: branches — line 40
+# parameter: pull_request — line 41
+# parameter: workflow_dispatch — line 42
+# parameter: permissions — line 43
+# parameter: contents — line 44
+# parameter: jobs — line 45
+# parameter: analyze — line 46
+# parameter: name — line 47
+# parameter: runs-on — line 48
+# parameter: timeout-minutes — line 49
+# parameter: permissions — line 50
+# parameter: contents — line 51
+# parameter: security-events — line 52
+# parameter: actions — line 53
+# parameter: strategy — line 54
+# parameter: fail-fast — line 55
+# parameter: matrix — line 56
+# parameter: language — line 57
+# parameter: steps — line 58
+# parameter: uses — line 59
+# parameter: with — line 60
+# parameter: persist-credentials — line 61
+# parameter: uses — line 62
+# parameter: with — line 63
+# parameter: languages — line 64
+# parameter: queries — line 65
+# parameter: build-mode — line 66
+# parameter: uses — line 67
+# parameter: with — line 68
+# parameter: upload-database — line 69
+# END CODE MAP
+name: CodeQL
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  analyze:
+    name: CodeQL / ${{ matrix.language }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [python, javascript-typescript]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+          build-mode: none
+      - uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4
+        with:
+          upload-database: false

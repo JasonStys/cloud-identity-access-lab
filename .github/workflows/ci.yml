@@ -1,0 +1,225 @@
+# Jason Stys: native identity/policy/IaC/browser checks, no cloud privileges, artifacts or Actions caches.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: name — line 109
+# parameter: on — line 110
+# parameter: push — line 111
+# parameter: branches — line 112
+# parameter: pull_request — line 113
+# parameter: workflow_dispatch — line 114
+# parameter: permissions — line 115
+# parameter: contents — line 116
+# parameter: concurrency — line 117
+# parameter: group — line 118
+# parameter: cancel-in-progress — line 119
+# parameter: jobs — line 120
+# parameter: quality — line 121
+# parameter: name — line 122
+# parameter: runs-on — line 123
+# parameter: timeout-minutes — line 124
+# parameter: strategy — line 125
+# parameter: fail-fast — line 126
+# parameter: matrix — line 127
+# parameter: include — line 128
+# parameter: steps — line 133
+# parameter: uses — line 134
+# parameter: with — line 135
+# parameter: persist-credentials — line 136
+# parameter: uses — line 137
+# parameter: with — line 138
+# parameter: python-version — line 139
+# parameter: uses — line 140
+# parameter: with — line 141
+# parameter: node-version — line 142
+# parameter: package-manager-cache — line 143
+# parameter: run — line 144
+# parameter: run — line 145
+# parameter: run — line 146
+# parameter: run — line 147
+# parameter: shell — line 148
+# parameter: run — line 149
+# parameter: native — line 150
+# parameter: name — line 151
+# parameter: runs-on — line 152
+# parameter: timeout-minutes — line 153
+# parameter: strategy — line 154
+# parameter: fail-fast — line 155
+# parameter: matrix — line 156
+# parameter: os — line 157
+# parameter: steps — line 158
+# parameter: uses — line 159
+# parameter: with — line 160
+# parameter: persist-credentials — line 161
+# parameter: uses — line 162
+# parameter: with — line 163
+# parameter: python-version — line 164
+# parameter: run — line 165
+# parameter: run — line 166
+# parameter: run — line 167
+# parameter: shell — line 168
+# parameter: run — line 169
+# variable: RUNNER_OS — line 171
+# variable: suffix — line 172
+# variable: suffix — line 173
+# variable: suffix — line 174
+# variable: suffix — line 175
+# variable: suffix — line 176
+# variable: suffix — line 177
+# variable: suffix — line 178
+# parameter: browser — line 179
+# parameter: name — line 180
+# parameter: runs-on — line 181
+# parameter: timeout-minutes — line 182
+# parameter: steps — line 183
+# parameter: uses — line 184
+# parameter: with — line 185
+# parameter: persist-credentials — line 186
+# parameter: uses — line 187
+# parameter: with — line 188
+# parameter: python-version — line 189
+# parameter: uses — line 190
+# parameter: with — line 191
+# parameter: node-version — line 192
+# parameter: package-manager-cache — line 193
+# parameter: run — line 194
+# parameter: run — line 195
+# parameter: run — line 196
+# parameter: run — line 197
+# parameter: run — line 198
+# parameter: run — line 199
+# parameter: security — line 200
+# parameter: name — line 201
+# parameter: runs-on — line 202
+# parameter: timeout-minutes — line 203
+# parameter: steps — line 204
+# parameter: uses — line 205
+# parameter: with — line 206
+# parameter: persist-credentials — line 207
+# parameter: fetch-depth — line 208
+# parameter: uses — line 209
+# parameter: with — line 210
+# parameter: python-version — line 211
+# parameter: uses — line 212
+# parameter: with — line 213
+# parameter: node-version — line 214
+# parameter: package-manager-cache — line 215
+# parameter: run — line 216
+# parameter: run — line 217
+# parameter: run — line 218
+# END CODE MAP
+name: Validate
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    name: Python + native OPA / ${{ matrix.os }} / ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-24.04, python: '3.12'}
+          - {os: ubuntu-24.04, python: '3.14'}
+          - {os: windows-latest, python: '3.14'}
+          - {os: macos-15-intel, python: '3.14'}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: python -m cial.tooling opa
+      - run: npm ci --ignore-scripts
+      - run: npm run build
+      - shell: bash
+        run: bash scripts/validate.sh
+  native:
+    name: Native Rego + Terraform / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: python -m cial.tooling opa
+      - run: python -m cial.tooling terraform
+      - shell: bash
+        run: |
+          suffix=""
+          if [[ "$RUNNER_OS" == "Windows" ]]; then suffix=".exe"; fi
+          ".tools/opa$suffix" fmt --list --fail policy
+          ".tools/opa$suffix" check --strict policy
+          ".tools/opa$suffix" test policy -v
+          ".tools/terraform$suffix" -chdir=infra fmt -check -recursive
+          ".tools/terraform$suffix" -chdir=infra init -backend=false -input=false
+          ".tools/terraform$suffix" -chdir=infra validate
+          ".tools/terraform$suffix" -chdir=infra test -no-color
+  browser:
+    name: Browser / Chromium, Firefox, WebKit, mobile
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: python -m cial.tooling opa
+      - run: npm ci --ignore-scripts
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run test:e2e
+  security:
+    name: Security / locked graphs, secrets and workflows
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.21.0'
+          package-manager-cache: false
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: npm ci --ignore-scripts
+      - run: |
+          python -m pip_audit -r requirements-dev.lock --disable-pip --no-deps
+          npm run audit
+          python scripts/scanners.py gitleaks
+          python scripts/scanners.py actionlint
+          .tools/gitleaks git . --redact --no-banner
+          .tools/actionlint
+          shellcheck scripts/validate.sh
