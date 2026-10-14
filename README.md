@@ -83,7 +83,7 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [.gitattributes](.gitattributes) | Consistent LF checkouts across supported operating systems. |
 | [.github/workflows/ci.yml](.github/workflows/ci.yml) | Jason Stys: native identity/policy/IaC/browser checks, no cloud privileges, artifacts or Actions caches. |
 | [.github/workflows/codeql.yml](.github/workflows/codeql.yml) | Jason Stys: full supported-language security-extended analysis; no CodeQL database artifact upload. |
-| [.gitignore](.gitignore) | Exclude runtime tokens, databases, builds, compilers and working reports. |
+| [.gitignore](.gitignore) | Exclude local keys/tokens, native tools, environments, builds and working evidence. |
 | [CHANGELOG.md](CHANGELOG.md) | Changelog. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contributing. |
 | [LICENSE](LICENSE) | MIT license for authored code; upstream tools retain their licenses. |
@@ -114,8 +114,8 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [policy/access\_test.rego](policy/access_test.rego) | Jason Stys: native Rego positive/negative and trusted-registry emergency boundary tests. |
 | [policy/registry.json](policy/registry.json) | Authoritative synthetic principal/resource/emergency registry; no real identities. |
 | [pyproject.toml](pyproject.toml) | Strict Python evidence/conformance lint/type/95% combined coverage gates. |
-| [requirements-dev.in](requirements-dev.in) | Exact Python development tool inputs. |
-| [requirements-dev.lock](requirements-dev.lock) | Complete portable hash-locked Python development graph. |
+| [requirements-dev.in](requirements-dev.in) | Exact Python runtime/development dependency inputs. |
+| [requirements-dev.lock](requirements-dev.lock) | Complete portable hash-locked Python runtime/development graph. |
 | [scripts/build.mjs](scripts/build.mjs) | Jason Stys: copy only reviewed static assets after strict TypeScript compilation. |
 | [scripts/code\_map.py](scripts/code_map.py) | Jason Stys: generate exact definition/variable line maps and verify Python function/class contracts. |
 | [scripts/file\_guide.py](scripts/file_guide.py) | Jason Stys: exact tracked-file README purpose inventory; unknown files fail instead of receiving guessed descriptions. |
@@ -130,10 +130,10 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [tests/test\_local.py](tests/test_local.py) | Jason Stys: actual loopback evidence routes, privacy guards, CLI lifecycle and report nonoverwrite. |
 | [tests/test\_tooling.py](tests/test_tooling.py) | Jason Stys: isolated official-tool download/hash/extraction negative tests; never execute downloaded test bytes. |
 | [tests/ui/model.test.mjs](tests/ui/model.test.mjs) | Jason Stys: native compiled-TypeScript evidence/negative/filter contracts, not policy-engine simulation. |
-| [tools.lock.json](tools.lock.json) | Pinned OPA/Terraform platform release URLs and SHA256 digests. |
+| [tools.lock.json](tools.lock.json) | Official native-tool/scanner versions, release URLs and SHA256 digests. |
 | [tsconfig.json](tsconfig.json) | Strict browser compilation with unchecked-index/nullable safeguards. |
 | [web/app.ts](web/app.ts) | Jason Stys: accessible immutable evidence viewer; no token entry, account data, remote APIs or cloud mutation. |
-| [web/index.html](web/index.html) | Responsive semantic local-only browser encoding exercise and scope/help. |
+| [web/index.html](web/index.html) | Jason Stys: semantic local-only synthetic identity/access assurance viewer and help. |
 | [web/model.ts](web/model.ts) | Jason Stys: runtime-checked bounded evidence contracts, filtering and truthful observed-versus-expected summaries. |
 | [web/style.css](web/style.css) | Jason Stys: restrained navy/cyan evidence-console layout with visible focus and mobile-contained tables. |
 

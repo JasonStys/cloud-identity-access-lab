@@ -7,19 +7,19 @@
 # definition: purpose — line 55
 # parameter: name — line 55
 # variable: text — line 59
-# variable: line — line 73
-# variable: line — line 82
-# definition: main — line 88
-# variable: parser — line 90
-# variable: args — line 92
-# variable: names — line 93
-# variable: rows — line 101
-# variable: name — line 102
-# variable: path — line 112
-# variable: original — line 113
-# variable: end — line 114
-# variable: start — line 114
-# variable: expected — line 115
+# variable: line — line 71
+# variable: line — line 80
+# definition: main — line 86
+# variable: parser — line 88
+# variable: args — line 90
+# variable: names — line 91
+# variable: rows — line 99
+# variable: name — line 100
+# variable: path — line 110
+# variable: original — line 111
+# variable: end — line 112
+# variable: start — line 112
+# variable: expected — line 113
 # END CODE MAP
 
 import argparse
@@ -33,7 +33,7 @@ SPECIAL = {
     "policy/registry.json": "Authoritative synthetic principal/resource/emergency registry; no real identities.",
     "infra/main.tf": "Provider-free validated AWS trust, scoped identity and boundary document generator.",
     "infra/tests/policies.tftest.hcl": "Native plan-only Terraform trust/scope/invalid-input tests, no providers.",
-    ".gitignore": "Exclude runtime tokens, databases, builds, compilers and working reports.",
+    ".gitignore": "Exclude local keys/tokens, native tools, environments, builds and working evidence.",
     ".gitattributes": "Consistent LF checkouts across supported operating systems.",
     "LICENSE": "MIT license for authored code; upstream tools retain their licenses.",
     "global.json": "Exact .NET SDK 10.0.401, no automatic version roll-forward.",
@@ -41,9 +41,9 @@ SPECIAL = {
     "package-lock.json": "Complete integrity-locked npm tool graph.",
     "pyproject.toml": "Strict Python evidence/conformance lint/type/95% combined coverage gates.",
     "tsconfig.json": "Strict browser compilation with unchecked-index/nullable safeguards.",
-    "requirements-dev.in": "Exact Python development tool inputs.",
-    "requirements-dev.lock": "Complete portable hash-locked Python development graph.",
-    "tools.lock.json": "Pinned OPA/Terraform platform release URLs and SHA256 digests.",
+    "requirements-dev.in": "Exact Python runtime/development dependency inputs.",
+    "requirements-dev.lock": "Complete portable hash-locked Python runtime/development graph.",
+    "tools.lock.json": "Official native-tool/scanner versions, release URLs and SHA256 digests.",
     "services/session/packages.lock.json": "Locked framework-only server restore, no external NuGet packages.",
     "tests/session/packages.lock.json": "Locked framework-only native test restore.",
     "docs/reports/ci.json": "Immutable accepted-source Actions check snapshot, not a future guarantee.",
@@ -62,9 +62,7 @@ def purpose(name: str) -> str:
     if name.endswith(".md"):
         return text.splitlines()[0].lstrip("# ") + "."
     if name.endswith(".html") and name.startswith("web/"):
-        return (
-            "Responsive semantic local-only browser encoding exercise and scope/help."
-        )
+        return text.splitlines()[0].removeprefix("<!-- ").removesuffix(" -->")
     if name.endswith(".csproj"):
         return text.splitlines()[0].removeprefix("<!-- ").removesuffix(" -->")
     if name.endswith((".sh", ".yml", ".sql", ".rego")):
