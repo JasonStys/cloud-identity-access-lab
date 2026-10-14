@@ -1,29 +1,30 @@
 """Jason Stys: loopback-only immutable synthetic evidence viewer, fixed assets and no credential/input endpoints."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 39
-# definition: server — line 42
-# parameter: port — line 42
-# parameter: report — line 42
-# variable: payload — line 46
-# variable: document — line 47
-# variable: assets — line 48
-# definition: Handler — line 70
-# definition: setup — line 73
-# parameter: self — line 73
-# definition: log_message — line 78
-# parameter: args — line 78
-# parameter: format — line 78
-# parameter: self — line 78
-# definition: do_GET — line 81
-# parameter: self — line 81
-# variable: host — line 83
-# variable: origin — line 84
-# variable: rejected — line 85
-# variable: status — line 90
-# variable: data — line 91
-# variable: kind — line 91
-# definition: do_POST — line 115
-# parameter: self — line 115
+# variable: ROOT — line 40
+# definition: server — line 43
+# parameter: port — line 43
+# parameter: report — line 43
+# variable: payload — line 47
+# variable: document — line 48
+# variable: assets — line 49
+# definition: Handler — line 71
+# definition: setup — line 74
+# parameter: self — line 74
+# definition: log_message — line 79
+# parameter: args — line 79
+# parameter: format — line 79
+# parameter: self — line 79
+# definition: do_GET — line 82
+# parameter: self — line 82
+# variable: host — line 84
+# variable: origin — line 85
+# variable: rejected — line 86
+# variable: status — line 91
+# variable: data — line 92
+# variable: kind — line 92
+# variable: filename — line 109
+# definition: do_POST — line 120
+# parameter: self — line 120
 # END CODE MAP
 
 from __future__ import annotations
@@ -105,9 +106,13 @@ def server(report: dict[str, Any], port: int = 0) -> HTTPServer:
             self.send_header("Referrer-Policy", "no-referrer")
             self.send_header("Connection", "close")
             if self.path in {"/evidence.json", "/evidence.html"} and status == 200:
+                filename = (
+                    "evidence.json"
+                    if self.path == "/evidence.json"
+                    else "evidence.html"
+                )
                 self.send_header(
-                    "Content-Disposition",
-                    'attachment; filename="' + self.path[1:] + '"',
+                    "Content-Disposition", 'attachment; filename="' + filename + '"'
                 )
             self.end_headers()
             self.wfile.write(data)
