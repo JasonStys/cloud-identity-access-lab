@@ -27,6 +27,8 @@ The generic Rego resource model is deliberately separate from AWS IAM semantics.
 
 Prerequisites: Python 3.12+, Node 24+, x86-64 Windows/Linux/macOS. Native tools are installed locally from reviewed official releases with SHA256 verification, not onto global PATH.
 
+macOS Intel builds the pinned cryptography source distribution rather than using a prebuilt wheel; see the runbook for Rust/C/OpenSSL build prerequisites. This is a source-first portfolio lab, not a one-click production installer.
+
     python -m venv .venv
     .venv\Scripts\python -m pip install --require-hashes -r requirements-dev.lock
     .venv\Scripts\python -m cial.tooling opa
@@ -97,6 +99,7 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [cial/tooling.py](cial/tooling.py) | Jason Stys: verify and install fixed official native tools; never execute arbitrary caller-selected programs. |
 | [docs/architecture.md](docs/architecture.md) | ADR-001: signed local identity integration and native policy assurance without cloud changes. |
 | [docs/contracts.md](docs/contracts.md) | Identity, policy, evidence and infrastructure contracts. |
+| [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source Actions check snapshot, not a future guarantee. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Validation and acceptance record. |
 | [docs/research.md](docs/research.md) | Primary sources and design implications. |
 | [docs/runbook.md](docs/runbook.md) | Local setup, evidence, troubleshooting and safe teardown. |

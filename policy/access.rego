@@ -1,26 +1,27 @@
 # Jason Stys: authoritative tenant/action/MFA and time-limited emergency grants in real Rego.
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# rule: valid — line 30
-# binding: permitted — line 44
-# rule: permitted — line 46
-# binding: principal — line 48
-# rule: principal — line 48
-# binding: resource — line 49
-# rule: resource — line 49
-# rule: identity_assurance — line 59
-# rule: identity_assurance — line 64
-# rule: identity_assurance — line 69
-# rule: emergency_assurance — line 75
-# rule: emergency_assurance — line 77
-# binding: grant — line 79
-# rule: grant — line 79
-# binding: item — line 88
-# binding: decision — line 93
-# rule: decision — line 93
-# binding: reason — line 94
-# rule: reason — line 94
+# rule: valid — line 31
+# binding: permitted — line 45
+# rule: permitted — line 45
+# rule: permitted — line 47
+# binding: principal — line 49
+# binding: resource — line 50
+# parameter: principal — line 60
+# rule: identity_assurance — line 60
+# parameter: principal — line 65
+# rule: identity_assurance — line 65
+# parameter: principal — line 70
+# rule: identity_assurance — line 70
+# rule: emergency_assurance — line 76
+# rule: emergency_assurance — line 78
+# binding: grant — line 80
+# binding: item — line 89
+# binding: decision — line 94
+# rule: decision — line 94
 # binding: reason — line 95
 # rule: reason — line 95
+# binding: reason — line 96
+# rule: reason — line 96
 # END CODE MAP
 package cial
 

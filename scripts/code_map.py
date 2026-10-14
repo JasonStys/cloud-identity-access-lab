@@ -1,50 +1,52 @@
 """Jason Stys: generate exact definition/variable line maps and verify Python function/class contracts."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 55
-# definition: mapped — line 58
-# parameter: source — line 58
-# parameter: suffix — line 58
-# variable: prefix — line 60
-# variable: begin — line 67
-# variable: end — line 67
-# variable: source — line 68
-# variable: lines — line 74
-# variable: records — line 75
-# variable: tree — line 77
-# variable: first — line 78
-# variable: insertion — line 79
-# variable: node — line 86
-# variable: insertion — line 98
+# variable: ROOT — line 57
+# definition: mapped — line 60
+# parameter: source — line 60
+# parameter: suffix — line 60
+# variable: prefix — line 62
+# variable: begin — line 69
+# variable: end — line 69
+# variable: source — line 70
+# variable: lines — line 76
+# variable: records — line 77
+# variable: tree — line 79
+# variable: first — line 80
+# variable: insertion — line 81
+# variable: node — line 88
 # variable: insertion — line 100
-# variable: line — line 101
-# variable: number — line 101
-# variable: name — line 104
+# variable: insertion — line 102
+# variable: line — line 103
+# variable: number — line 103
 # variable: name — line 106
 # variable: name — line 108
 # variable: name — line 110
-# variable: name — line 113
-# variable: name — line 117
-# variable: value — line 119
-# variable: kind — line 122
-# variable: name — line 122
-# variable: name — line 126
-# variable: name — line 129
-# variable: name — line 133
-# variable: name — line 138
-# variable: count — line 140
-# variable: header — line 141
-# variable: kind — line 145
-# variable: name — line 145
-# variable: number — line 145
-# parameter: item — line 146
-# definition: main — line 155
-# variable: parser — line 157
-# variable: args — line 159
-# variable: paths — line 160
-# variable: stale — line 176
-# variable: path — line 177
-# variable: original — line 178
-# variable: expected — line 179
+# variable: name — line 112
+# variable: name — line 115
+# variable: arguments — line 120
+# variable: name — line 121
+# variable: name — line 123
+# variable: value — line 125
+# variable: kind — line 128
+# variable: name — line 128
+# variable: name — line 132
+# variable: name — line 135
+# variable: name — line 139
+# variable: name — line 144
+# variable: count — line 146
+# variable: header — line 147
+# variable: kind — line 151
+# variable: name — line 151
+# variable: number — line 151
+# parameter: item — line 152
+# definition: main — line 161
+# variable: parser — line 163
+# variable: args — line 165
+# variable: paths — line 166
+# variable: stale — line 182
+# variable: path — line 183
+# variable: original — line 184
+# variable: expected — line 185
 # END CODE MAP
 
 import argparse
@@ -56,7 +58,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def mapped(source: str, suffix: str) -> str:
-    """Parse Python AST or declarative SQL/YAML/shell symbols without executing any authored source."""
+    """Parse Python AST or lexical native-policy/IaC/operational declarations without executing authored source."""
     prefix = (
         "--"
         if suffix == ".sql"
@@ -111,9 +113,13 @@ def mapped(source: str, suffix: str) -> str:
                 records.add(("variable", name, number))
             if suffix == ".rego":
                 for name in re.findall(
-                    r"^\s*([a-z]\w*)\s*(?:\([^)]*\))?\s*(?::=|if|contains)", line
+                    r"^(?:default\s+)?([a-z]\w*)\s*(?:\([^)]*\))?\s*(?::=|if|contains)",
+                    line,
                 ):
                     records.add(("rule", name, number))
+                for arguments in re.findall(r"^[a-z]\w*\(([^)]*)\)", line):
+                    for name in re.findall(r"\b[a-z]\w*\b", arguments):
+                        records.add(("parameter", name, number))
                 for name in re.findall(r"\b(\w+)\s*:=|\bsome\s+(\w+)", line):
                     records.add(
                         ("binding", next(value for value in name if value), number)

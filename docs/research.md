@@ -1,6 +1,6 @@
 # Primary sources and design implications
 
-Reviewed2026-10-14 by Jason Stys. References informed testable boundaries; this is not an assertion of certification or live-provider integration.
+Reviewed 2026-10-14 by Jason Stys. References informed testable boundaries; this is not an assertion of certification or live-provider integration.
 
 - [AWS policy evaluation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html), [permissions boundaries](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html): explicit deny and ceilings matter, but resource/session principal and organization interactions prevent claiming our generic policy is a complete AWS IAM evaluator.
 - [GitHub OIDC in AWS](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws): exact aud/sub trust and repository/branch/environment context matter. Newer repository subject formats include immutable owner/repository IDs. The HCL module intentionally supports the immutable branch profile only; it does not guess a real repository's token profile or use wildcard trust.

@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "accepted_source": "3886e1e5bb7fa0594f8804243263d30d37dd70db",
+  "recorded_at": "2026-10-14 09:18:32 UTC",
+  "note": "Immutable accepted-source snapshot. Later documentation/declaration-map maintenance commits rerun both workflows; this is not a future-source guarantee.",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 38540610192,
+      "headSha": "3886e1e5bb7fa0594f8804243263d30d37dd70db",
+      "jobs": [
+        {
+          "name": "Security / locked graphs, secrets and workflows",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:39Z",
+          "completedAt": "2026-10-14T09:13:06Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774312377"
+        },
+        {
+          "name": "Browser / Chromium, Firefox, WebKit, mobile",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:40Z",
+          "completedAt": "2026-10-14T09:14:07Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774312693"
+        },
+        {
+          "name": "Native Rego + Terraform / ubuntu-24.04",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:39Z",
+          "completedAt": "2026-10-14T09:12:58Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774312725"
+        },
+        {
+          "name": "Native Rego + Terraform / windows-latest",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:39Z",
+          "completedAt": "2026-10-14T09:13:21Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774312763"
+        },
+        {
+          "name": "Python + native OPA / macos-15-intel / 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:41Z",
+          "completedAt": "2026-10-14T09:17:51Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774312819"
+        },
+        {
+          "name": "Python + native OPA / windows-latest / 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:41Z",
+          "completedAt": "2026-10-14T09:13:47Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774312935"
+        },
+        {
+          "name": "Python + native OPA / ubuntu-24.04 / 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:39Z",
+          "completedAt": "2026-10-14T09:13:07Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774313069"
+        },
+        {
+          "name": "Python + native OPA / ubuntu-24.04 / 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:40Z",
+          "completedAt": "2026-10-14T09:13:17Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192/job/115774313110"
+        }
+      ],
+      "status": "completed",
+      "updatedAt": "2026-10-14T09:17:51Z",
+      "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540610192",
+      "workflowName": "Validate"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38540609834,
+      "headSha": "3886e1e5bb7fa0594f8804243263d30d37dd70db",
+      "jobs": [
+        {
+          "name": "CodeQL / python",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:12Z",
+          "completedAt": "2026-10-14T09:12:59Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540609834/job/115774126975"
+        },
+        {
+          "name": "CodeQL / javascript-typescript",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-10-14T09:12:13Z",
+          "completedAt": "2026-10-14T09:13:08Z",
+          "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540609834/job/115774127557"
+        }
+      ],
+      "status": "completed",
+      "updatedAt": "2026-10-14T09:13:09Z",
+      "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/38540609834",
+      "workflowName": "CodeQL"
+    }
+  ]
+}

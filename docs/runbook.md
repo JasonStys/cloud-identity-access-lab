@@ -4,7 +4,9 @@ Author: Jason Stys. Read the README first; use synthetic inputs only.
 
 ## Setup and native commands
 
-Python3.12+, Node24+, x86-64 Windows/Linux/macOS. Hash-locked runtime/dev install, npm ci --ignore-scripts, build assets. Install OPA1.21.2 and Terraform1.16.5 with python -m cial.tooling opa/terraform. Native tool hashes are reviewed in tools.lock.json; installer doesn't alter global PATH. ARM platform support is intentionally not claimed.
+Python 3.12+, Node 24+, x86-64 Windows/Linux/macOS. Hash-locked runtime/dev install, npm ci --ignore-scripts, build assets. Install OPA 1.21.2 and Terraform 1.16.5 with python -m cial.tooling opa/terraform. Native tool hashes are reviewed in tools.lock.json; installer doesn't alter global PATH. ARM platform support is intentionally not claimed.
+
+cryptography 50.0.2 does not publish a macOS Intel wheel: that platform builds the hash-pinned source distribution and may require Rust, C compiler and OpenSSL/libffi prerequisites. The hosted Intel lane verifies that source build in its equipped runner, not a dependency-free local install. Follow [upstream installation instructions](https://cryptography.io/en/latest/installation/); never bypass hashes or downgrade security checks to avoid setup work.
 
 PowerShell:
 
