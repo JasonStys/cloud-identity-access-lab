@@ -1,18 +1,19 @@
 """Jason Stys: genuine signed-identity/OPA matrix runner, nonoverwriting reports and owned-loopback preview."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: save — line 30
-# parameter: output — line 30
-# parameter: report — line 30
-# variable: output — line 32
-# variable: path — line 34
-# definition: main — line 43
-# parameter: argv — line 43
-# variable: parser — line 45
-# variable: args — line 51
-# variable: report — line 55
-# variable: row — line 56
-# variable: successes — line 56
-# variable: listener — line 65
+# definition: save — line 32
+# parameter: output — line 32
+# parameter: report — line 32
+# variable: output — line 34
+# variable: path — line 36
+# definition: main — line 45
+# parameter: argv — line 45
+# variable: parser — line 47
+# variable: args — line 56
+# variable: comparison — line 66
+# variable: report — line 74
+# variable: row — line 75
+# variable: successes — line 75
+# variable: listener — line 84
 # END CODE MAP
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ import argparse
 from pathlib import Path
 from typing import Any
 
+from . import recertify
 from .evidence import canonical, digest, passed, render
 from .identity import Rejected
 from .scenarios import run
@@ -45,11 +47,28 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Jason Stys: synthetic identity/access evidence, no cloud changes"
     )
-    parser.add_argument("command", choices=["run", "serve"])
+    parser.add_argument("command", choices=["run", "serve", "recertify"])
     parser.add_argument("--out", type=Path)
     parser.add_argument("--port", type=int, default=0)
+    parser.add_argument("--baseline", type=Path)
+    parser.add_argument("--candidate", type=Path)
+    parser.add_argument("--at", type=int)
     args = parser.parse_args(argv)
     try:
+        if args.command == "recertify":
+            if (
+                args.baseline is None
+                or args.candidate is None
+                or args.at is None
+                or args.out is None
+            ):
+                raise Rejected("review_arguments")
+            comparison = recertify.compare(args.baseline, args.candidate, args.at)
+            recertify.save(comparison, args.out)
+            print(
+                f"Potential permission changes: {len(comparison['permission_gains'])} gains / {len(comparison['permission_losses'])} losses"
+            )
+            return int(comparison["review_required"])
         if args.command == "run" and args.out is None:
             raise Rejected("output_required")
         report = run()

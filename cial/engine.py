@@ -1,26 +1,28 @@
 """Jason Stys: trusted fixed-policy OPA adapter, closed request contract and privacy-safe decisions."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 35
-# variable: ACTIONS — line 36
-# variable: RESOURCES — line 37
-# variable: REASONS — line 38
-# definition: Engine — line 41
-# definition: __init__ — line 44
-# parameter: executable — line 44
-# parameter: self — line 44
-# parameter: verifier — line 44
-# attribute: executable — line 46
-# attribute: verifier — line 47
-# definition: decide — line 49
-# parameter: action — line 50
-# parameter: now — line 50
-# parameter: resource — line 50
-# parameter: self — line 50
-# parameter: token — line 50
-# variable: identity — line 61
-# variable: context — line 64
-# variable: result — line 72
-# variable: value — line 97
+# variable: ROOT — line 37
+# variable: ACTIONS — line 38
+# variable: RESOURCES — line 39
+# variable: REASONS — line 40
+# definition: Engine — line 43
+# definition: __init__ — line 46
+# parameter: executable — line 47
+# parameter: registry — line 47
+# parameter: self — line 47
+# parameter: verifier — line 47
+# attribute: executable — line 50
+# attribute: verifier — line 51
+# attribute: registry — line 52
+# definition: decide — line 56
+# parameter: action — line 57
+# parameter: now — line 57
+# parameter: resource — line 57
+# parameter: self — line 57
+# parameter: token — line 57
+# variable: identity — line 68
+# variable: context — line 71
+# variable: result — line 79
+# variable: value — line 104
 # END CODE MAP
 
 from __future__ import annotations
@@ -41,10 +43,15 @@ REASONS = {"allowed", "policy_denied", "credential_rejected"}
 class Engine:
     """Evaluate only reviewed local Rego and registry; no caller scripts, remote policy or shell interpolation."""
 
-    def __init__(self, executable: Path, verifier: Verifier) -> None:
+    def __init__(
+        self, executable: Path, verifier: Verifier, registry: Path | None = None
+    ) -> None:
         """Bind a trusted installed OPA executable and pinned identity verifier."""
         self.executable = executable
         self.verifier = verifier
+        self.registry = (
+            registry if registry is not None else ROOT / "policy/registry.json"
+        )
 
     def decide(
         self, token: str, now: int, action: str, resource: str
@@ -80,7 +87,7 @@ class Engine:
                     "--data",
                     str(ROOT / "policy/access.rego"),
                     "--data",
-                    str(ROOT / "policy/registry.json"),
+                    str(self.registry),
                     "data.cial.decision",
                 ],
                 input=json.dumps(context),
