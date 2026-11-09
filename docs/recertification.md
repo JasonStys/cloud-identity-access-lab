@@ -1,0 +1,15 @@
+# Trusted synthetic entitlement recertification
+
+Created by Jason Stys. `recertify` compares baseline and proposed **trusted operator** registry snapshots through this lab's genuine signature verifier and native OPA engine. It helps a reviewer see potential tenant/action permission gains and losses before changing local policy data. It does not apply either registry or change cloud access.
+
+```text
+python -m cial recertify --baseline policy/registry.json --candidate path/to/private-proposal.json --at 2000000000 --out out/access-review
+```
+
+Copy the example registry to a private proposal first. Removing `publish` from `engineer-alpha` removes its fresh-MFA publishing context. Changing `reader-beta`'s tenant to alpha gains reads of alpha documents/artifacts while losing beta-document reads. These are review items, not an automatic recommendation to grant them. At the exact emergency `expires` second, rotate access is absent. JSON/HTML show permission gains/losses, current potential entitlements, exact registry/Rego hashes and emergency start/expiry/state. Inputs are never rewritten; output must be new and its parent exist. Exit0 means a valid comparison has no permission changes, exit1 means valid changes need review, exit2 rejects input/tool/output failure.
+
+The closed registry retains the current fixed four-resource/four-action Rego model, 1–8 synthetic principals, exact human/workload kinds and tenant/action ceilings, and one two-approver emergency grant of at most900 seconds. Unknown fields, wildcards, duplicate actions/approvers, self-approval and malformed scope/times are rejected. The union of compared subjects is capped at8. All combinations of subject × fresh-MFA false/true × four actions × four resources are independently verified and evaluated under both registries: at most256 contexts /512 actual native decisions. A 120-second review budget rejects incomplete work; each OPA process retains its existing10-second timeout.
+
+Registries are validated and copied to private temporary snapshots, with ephemeral in-memory Ed25519 keys and genuine signed fixture tokens. No credentials, keys, raw claims or token identifiers enter reports. The Rego implementation is fixed reviewed source; a proposal supplies data only, not executable policy. Both registries and labels are trusted synthetic operator inputs. Potential fresh-MFA contexts are issuer assertions in this lab, not completed physical MFA challenges or real-user authentication. This is not effective AWS IAM analysis, a cloud permission grant, account recertification certification or production approval. Real MFA/provider exchange, managed credentials, durable revocation and organizational cloud-policy interactions remain separate integration boundaries.
+
+Existing issuer/revocation/MFA/cross-tenant tests, actual OPA cases, Terraform document tests and browser viewer gates remain required. The new command is offline/local; no cloud API, external identity service, telemetry or Docker operation is added. Real policy/account data must stay private and outside Git. Review reports use escaped HTML with no scripts, active forms or external assets.

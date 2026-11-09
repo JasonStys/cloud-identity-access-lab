@@ -20,6 +20,7 @@ Prove which signed identities can—and cannot—cross an access boundary. Pytho
 | Emergency privilege | Trusted two-approver, scoped, time-limited emergency grant plus fresh MFA | Exact start/expiry, duplicate/self approval and duration negatives |
 | Cloud policy documents | Provider-free HCL generates AWS OIDC trust, scoped release identity and permissions boundary | Native Terraform validate and plan-only tests; no AWS API, IAM Simulator or apply |
 | Evidence viewer/exports | Strict JSON contract, searchable allow/deny/regression views, literal DOM rendering, sanitized JSON/inert HTML/SHA256 | Actual browsers, keyboard/mobile/axe, malicious-looking titles, download and malformed-response tests |
+| [Entitlement recertification](docs/recertification.md) | Trusted baseline/proposed registries through genuine signatures and native OPA; tenant/action gains, losses and emergency expiry | Closed bounded contexts, exact input/Rego hashes, immutable review reports; no cloud grants or implied approval |
 
 The generic Rego resource model is deliberately separate from AWS IAM semantics. It does not pretend to evaluate every AWS policy type, resource/session-principal exception, SCP/RCP or KMS/organization interaction.
 
@@ -94,13 +95,16 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [cial/engine.py](cial/engine.py) | Jason Stys: trusted fixed-policy OPA adapter, closed request contract and privacy-safe decisions. |
 | [cial/evidence.py](cial/evidence.py) | Jason Stys: bounded truthful decision evidence, canonical hashes and inert HTML exports. |
 | [cial/identity.py](cial/identity.py) | Jason Stys: pinned Ed25519 JWT verification, authoritative time bounds and in-memory credential revocation. |
+| [cial/recertify.py](cial/recertify.py) | Real signed-context/OPA entitlement comparison of trusted synthetic registries. Jason Stys. |
 | [cial/scenarios.py](cial/scenarios.py) | Jason Stys: real signed-credential and OPA conformance scenarios; outcomes are observed, not canned success. |
 | [cial/server.py](cial/server.py) | Jason Stys: loopback-only immutable synthetic evidence viewer, fixed assets and no credential/input endpoints. |
 | [cial/tooling.py](cial/tooling.py) | Jason Stys: verify and install fixed official native tools; never execute arbitrary caller-selected programs. |
 | [docs/architecture.md](docs/architecture.md) | ADR-001: signed local identity integration and native policy assurance without cloud changes. |
 | [docs/contracts.md](docs/contracts.md) | Identity, policy, evidence and infrastructure contracts. |
+| [docs/recertification.md](docs/recertification.md) | Trusted synthetic entitlement recertification. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source Actions check snapshot, not a future guarantee. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/recertification-2026-11-09.md](docs/reports/recertification-2026-11-09.md) | Entitlement recertification validation — 2026-11-09. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Validation and acceptance record. |
 | [docs/research.md](docs/research.md) | Primary sources and design implications. |
 | [docs/runbook.md](docs/runbook.md) | Local setup, evidence, troubleshooting and safe teardown. |
@@ -129,6 +133,7 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [tests/test\_evidence.py](tests/test_evidence.py) | Jason Stys: truthful report/property negatives and inert escaping, independent from native policy acceptance. |
 | [tests/test\_identity.py](tests/test_identity.py) | Jason Stys: real signature/token-profile negatives, time properties and revocation boundaries. |
 | [tests/test\_local.py](tests/test_local.py) | Jason Stys: actual loopback evidence routes, privacy guards, CLI lifecycle and report nonoverwrite. |
+| [tests/test\_recertify.py](tests/test_recertify.py) | Real signed/native-policy recertification and closed trusted-registry boundaries. Jason Stys. |
 | [tests/test\_tooling.py](tests/test_tooling.py) | Jason Stys: isolated official-tool download/hash/extraction negative tests; never execute downloaded test bytes. |
 | [tests/ui/model.test.mjs](tests/ui/model.test.mjs) | Jason Stys: native compiled-TypeScript evidence/negative/filter contracts, not policy-engine simulation. |
 | [tools.lock.json](tools.lock.json) | Official native-tool/scanner versions, release URLs and SHA256 digests. |
