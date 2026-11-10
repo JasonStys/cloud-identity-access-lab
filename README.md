@@ -137,6 +137,7 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [tests/test\_evidence.py](tests/test_evidence.py) | Jason Stys: truthful report/property negatives and inert escaping, independent from native policy acceptance. |
 | [tests/test\_identity.py](tests/test_identity.py) | Jason Stys: real signature/token-profile negatives, time properties and revocation boundaries. |
 | [tests/test\_local.py](tests/test_local.py) | Jason Stys: actual loopback evidence routes, privacy guards, CLI lifecycle and report nonoverwrite. |
+| [tests/test\_publication\_policy.py](tests/test_publication_policy.py) | Jason Stys: independent real-ZIP publication privacy boundary and unknown-file rejection regressions. |
 | [tests/test\_recertify.py](tests/test_recertify.py) | Real signed/native-policy recertification and closed trusted-registry boundaries. Jason Stys. |
 | [tests/test\_tooling.py](tests/test_tooling.py) | Jason Stys: isolated official-tool download/hash/extraction negative tests; never execute downloaded test bytes. |
 | [tests/ui/model.test.mjs](tests/ui/model.test.mjs) | Jason Stys: native compiled-TypeScript evidence/negative/filter contracts, not policy-engine simulation. |
