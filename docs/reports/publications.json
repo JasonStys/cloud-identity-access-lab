@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "project": "cloud-identity-access-lab",
+  "author": "Jason Stys",
+  "editionDate": "2026-11-09",
+  "sourceBaseline": "2ffe676fb9ba49ced2902398062cef1ae8f7a5ae",
+  "sourceUrl": "https://github.com/JasonStys/cloud-identity-access-lab/tree/2ffe676fb9ba49ced2902398062cef1ae8f7a5ae",
+  "functionalEvidenceBaseline": "2ffe676fb9ba49ced2902398062cef1ae8f7a5ae",
+  "evidenceObservedAt": "2026-11-10T05:25:40.628667+00:00",
+  "workflowEvidence": [
+    {
+      "conclusion": "success",
+      "databaseId": 42701689564,
+      "event": "push",
+      "headSha": "2ffe676fb9ba49ced2902398062cef1ae8f7a5ae",
+      "name": "Validate",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/42701689564"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 42701689455,
+      "event": "push",
+      "headSha": "2ffe676fb9ba49ced2902398062cef1ae8f7a5ae",
+      "name": "CodeQL",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/cloud-identity-access-lab/actions/runs/42701689455"
+    }
+  ],
+  "summary": "Compare signed native OPA policy decisions across MFA, expiry and registry-bound contexts.",
+  "rationale": "Explains gained and lost access using authenticated synthetic evidence without changing cloud permissions.",
+  "limitations": [
+    "Permissions reflect a fixed synthetic Rego model, not real cloud login or effective provider authorization.",
+    "MFA contexts are signed assertions, not proof that an actual challenge was completed.",
+    "Registry/context signature checks do not change real cloud permissions or establish every deployed identity control."
+  ],
+  "documents": [
+    {
+      "filename": "project-guide.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 44434,
+      "sha256": "4e55460967656009c358e965766c446f5d8cf9f3b694ba79a29cab1518a1fec2",
+      "sourceBaseline": "2ffe676fb9ba49ced2902398062cef1ae8f7a5ae",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 4,
+        "renderedPageSha256": {
+          "page-1.png": "0c1bc76fb349a55b1d42188a399859810f3c4b55ba6b2fb2e957fecccd80c36e",
+          "page-2.png": "aba777e31c30d4babf05a4cf4b0b502c87a8cbbdf7bb073b563e22db0e81a834",
+          "page-3.png": "05bf77819fa646d62b118487dcd74aa33d9dc3370a9e2563ab57404909a6eb4d",
+          "page-4.png": "4d422185949abbbb8e79d6d6b70fc1031344203c757977b4f9fe0a45ad42cfd9"
+        }
+      }
+    }
+  ],
+  "scope": "Reviewed documentation editions of the cited source. Checksums identify bytes, not authorship. Historical measurements retain their own dates; integration CI must be checked separately."
+}

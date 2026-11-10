@@ -101,9 +101,13 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [cial/tooling.py](cial/tooling.py) | Jason Stys: verify and install fixed official native tools; never execute arbitrary caller-selected programs. |
 | [docs/architecture.md](docs/architecture.md) | ADR-001: signed local identity integration and native policy assurance without cloud changes. |
 | [docs/contracts.md](docs/contracts.md) | Identity, policy, evidence and infrastructure contracts. |
+| [docs/handbook.md](docs/handbook.md) | Cloud Identity Access Lab handbook. |
 | [docs/recertification.md](docs/recertification.md) | Trusted synthetic entitlement recertification. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Immutable accepted-source Actions check snapshot, not a future guarantee. |
+| [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed Word project guide bound to the documented source revision. |
+| [docs/reports/publications.json](docs/reports/publications.json) | Exact Office digests, visual review scopes and immutable source baselines. |
 | [docs/reports/recertification-2026-11-09.md](docs/reports/recertification-2026-11-09.md) | Entitlement recertification validation — 2026-11-09. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Validation and acceptance record. |
 | [docs/research.md](docs/research.md) | Primary sources and design implications. |
@@ -133,6 +137,7 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [tests/test\_evidence.py](tests/test_evidence.py) | Jason Stys: truthful report/property negatives and inert escaping, independent from native policy acceptance. |
 | [tests/test\_identity.py](tests/test_identity.py) | Jason Stys: real signature/token-profile negatives, time properties and revocation boundaries. |
 | [tests/test\_local.py](tests/test_local.py) | Jason Stys: actual loopback evidence routes, privacy guards, CLI lifecycle and report nonoverwrite. |
+| [tests/test\_publication\_policy.py](tests/test_publication_policy.py) | Jason Stys: independent real-ZIP publication privacy boundary and unknown-file rejection regressions. |
 | [tests/test\_recertify.py](tests/test_recertify.py) | Real signed/native-policy recertification and closed trusted-registry boundaries. Jason Stys. |
 | [tests/test\_tooling.py](tests/test_tooling.py) | Jason Stys: isolated official-tool download/hash/extraction negative tests; never execute downloaded test bytes. |
 | [tests/ui/model.test.mjs](tests/ui/model.test.mjs) | Jason Stys: native compiled-TypeScript evidence/negative/filter contracts, not policy-engine simulation. |
@@ -144,3 +149,9 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [web/style.css](web/style.css) | Jason Stys: restrained navy/cyan evidence-console layout with visible focus and mobile-contained tables. |
 
 <!-- END FILE GUIDE -->
+
+## Documentation editions
+
+Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx).
+
+[Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.

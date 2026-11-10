@@ -4,22 +4,22 @@
 # variable: BEGIN — line 31
 # variable: END — line 31
 # variable: SPECIAL — line 32
-# definition: purpose — line 55
-# parameter: name — line 55
-# variable: text — line 59
-# variable: line — line 71
-# variable: line — line 80
-# definition: main — line 86
-# variable: parser — line 88
-# variable: args — line 90
-# variable: names — line 91
-# variable: rows — line 99
-# variable: name — line 100
-# variable: path — line 110
-# variable: original — line 111
-# variable: end — line 112
-# variable: start — line 112
-# variable: expected — line 113
+# definition: purpose — line 57
+# parameter: name — line 57
+# variable: text — line 61
+# variable: line — line 73
+# variable: line — line 82
+# definition: main — line 88
+# variable: parser — line 90
+# variable: args — line 92
+# variable: names — line 93
+# variable: rows — line 101
+# variable: name — line 102
+# variable: path — line 112
+# variable: original — line 113
+# variable: end — line 114
+# variable: start — line 114
+# variable: expected — line 115
 # END CODE MAP
 
 import argparse
@@ -30,6 +30,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "docs/reports/project-guide.docx": "Reviewed Word project guide bound to the documented source revision.",
+    "docs/reports/publications.json": "Exact Office digests, visual review scopes and immutable source baselines.",
     "policy/registry.json": "Authoritative synthetic principal/resource/emergency registry; no real identities.",
     "infra/main.tf": "Provider-free validated AWS trust, scoped identity and boundary document generator.",
     "infra/tests/policies.tftest.hcl": "Native plan-only Terraform trust/scope/invalid-input tests, no providers.",
