@@ -86,7 +86,7 @@ from .tooling import executable
 
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[1]))
 PRODUCT, PROFILE = "cloud-identity-access-lab", "CloudIdentityAccessLab"
-TITLE, VERSION = "Cloud Identity Access Workbench", "1.1.0"
+TITLE, VERSION = "Cloud Identity Access Workbench", "1.1.1"
 COLUMNS = (
     "Subject / scenario",
     "Request / scope",

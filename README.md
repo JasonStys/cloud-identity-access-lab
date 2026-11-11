@@ -80,6 +80,14 @@ Revocation/emergency data are process-local/trusted operator inputs. An attacker
 
 All workflows avoid Actions artifacts/caches and cloud/id-token privileges. Logs/security results remain distinct storage. State/builds/keys/tokens are ignored, not encrypted. No Actions cleanup or account-permission change is part of this repo.
 
+## Native profile storage correction
+
+Version 1.1.1 rejects pre-existing linked/nonregular fixed profile and SQLite
+sidecar entries before initialization can write through an alias. Ordinary
+recovery files and existing profile schemas remain supported; no data is reset.
+See the [confirmed fixture, recovery tests and scope](docs/reports/profile-admission-2026-11-11.md).
+Earlier native releases and documentation retain their own dated evidence.
+
 ## Complete file guide
 
 Authored Python/TypeScript code includes purpose/function/class descriptions and checked AST exact-line declaration/parameter maps. Rego/HCL/YAML/Bash use checked lexical rule/configuration maps; native compilers/formatters independently validate syntax. Non-commentable JSON/lock/config purposes are documented below.
@@ -120,6 +128,7 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
 | [docs/reports/native-workbench-2026-11-10.md](docs/reports/native-workbench-2026-11-10.md) | Native identity workbench and bounded batch validation — 2026-11-10. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/profile-admission-2026-11-11.md](docs/reports/profile-admission-2026-11-11.md) | Fixed profile entry admission — November 11, 2026. |
 | [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed Word project guide bound to the documented source revision. |
 | [docs/reports/publications.json](docs/reports/publications.json) | Exact Office digests, visual review scopes and immutable source baselines. |
 | [docs/reports/recertification-2026-11-09.md](docs/reports/recertification-2026-11-09.md) | Entitlement recertification validation — 2026-11-09. |
@@ -166,6 +175,7 @@ Authored Python/TypeScript code includes purpose/function/class descriptions and
 | [tests/test\_identity.py](tests/test_identity.py) | Jason Stys: real signature/token-profile negatives, time properties and revocation boundaries. |
 | [tests/test\_local.py](tests/test_local.py) | Jason Stys: actual loopback evidence routes, privacy guards, CLI lifecycle and report nonoverwrite. |
 | [tests/test\_native\_inputs.py](tests/test_native_inputs.py) | Independent real descriptor, child-environment and exact native-resource boundaries. Jason Stys. |
+| [tests/test\_profile\_admission.py](tests/test_profile_admission.py) | Actual pre-existing alias refusal and ordinary SQLite recovery continuity. Jason Stys. |
 | [tests/test\_publication\_policy.py](tests/test_publication_policy.py) | Jason Stys: independent real-ZIP publication privacy boundary and unknown-file rejection regressions. |
 | [tests/test\_recertify.py](tests/test_recertify.py) | Real signed/native-policy recertification and closed trusted-registry boundaries. Jason Stys. |
 | [tests/test\_tooling.py](tests/test_tooling.py) | Jason Stys: isolated official-tool download/hash/extraction negative tests; never execute downloaded test bytes. |
