@@ -1,15 +1,14 @@
 """Real signed-context/OPA entitlement comparison of trusted synthetic registries. Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: closed — line 88
-# parameter: names — line 88
-# parameter: value — line 88
-# definition: token — line 95
-# parameter: subject — line 95
-# parameter: value — line 95
-# definition: registry — line 108
-# parameter: path — line 108
-# variable: stream — line 112
-# variable: content — line 113
+# definition: closed — line 93
+# parameter: names — line 93
+# parameter: value — line 93
+# definition: token — line 100
+# parameter: subject — line 100
+# parameter: value — line 100
+# definition: registry — line 113
+# parameter: path — line 113
+# variable: content — line 115
 # variable: root — line 117
 # variable: data — line 120
 # variable: name — line 129
@@ -43,30 +42,35 @@
 # variable: data — line 204
 # variable: name — line 204
 # variable: path — line 205
-# variable: subject — line 208
-# variable: mfa — line 209
-# variable: credential — line 210
-# variable: action — line 211
-# variable: resource — line 212
-# variable: new — line 215
-# variable: old — line 215
-# variable: engine — line 217
-# variable: gains — line 229
-# variable: row — line 230
-# variable: losses — line 232
-# variable: row — line 233
-# variable: grant — line 235
-# variable: row — line 250
-# definition: save — line 267
-# parameter: output — line 267
-# parameter: result — line 267
-# variable: absolute — line 269
-# variable: path — line 272
-# variable: text — line 275
-# variable: rows — line 276
-# variable: key — line 280
-# variable: row — line 290
-# variable: page — line 292
+# variable: contexts — line 208
+# variable: requests — line 209
+# variable: subject — line 210
+# variable: mfa — line 211
+# variable: credential — line 212
+# variable: action — line 213
+# variable: resource — line 214
+# variable: after_decisions — line 226
+# variable: before_decisions — line 226
+# variable: engine — line 227
+# variable: context — line 231
+# variable: new — line 231
+# variable: old — line 231
+# variable: gains — line 241
+# variable: row — line 242
+# variable: losses — line 244
+# variable: row — line 245
+# variable: grant — line 247
+# variable: row — line 263
+# definition: save — line 280
+# parameter: output — line 280
+# parameter: result — line 280
+# variable: absolute — line 282
+# variable: path — line 285
+# variable: text — line 288
+# variable: rows — line 289
+# variable: key — line 293
+# variable: row — line 303
+# variable: page — line 305
 # END CODE MAP
 
 from __future__ import annotations
@@ -82,6 +86,7 @@ from typing import Any
 
 from .engine import ACTIONS, RESOURCES, Engine
 from .identity import FixtureIssuer, Rejected, Verifier, unique_pairs
+from .inputs import read_source
 from .tooling import executable
 
 
@@ -107,12 +112,7 @@ def token(value: Any, subject: bool = False) -> str:
 
 def registry(path: Path) -> dict[str, Any]:
     """Read a closed <=64KiB trusted synthetic registry; never accept policies or executable code."""
-    if path.is_symlink() or path.is_junction() or not path.is_file():
-        raise Rejected("registry_file")
-    with path.open("rb") as stream:
-        content = stream.read(65537)
-    if len(content) > 65536:
-        raise Rejected("registry_bound")
+    content = read_source(path, 65536)
     try:
         root = closed(json.loads(content, object_pairs_hook=unique_pairs), {"lab"})
     except (ValueError, UnicodeError, RecursionError):
@@ -205,6 +205,8 @@ def compare(baseline: Path, candidate: Path, now: int) -> dict[str, Any]:
             path = root / f"{name}.json"
             path.write_bytes(encoded(data))
             engines.append(Engine(opa, Verifier(issuer.public_key), path))
+        contexts = []
+        requests = []
         for subject in subjects:
             for mfa in (False, True):
                 credential = issuer.issue(subject, now, mfa=mfa)
@@ -212,20 +214,30 @@ def compare(baseline: Path, candidate: Path, now: int) -> dict[str, Any]:
                     for resource in sorted(RESOURCES):
                         if time.monotonic() - started > 120:
                             raise Rejected("review_time_bound")
-                        old, new = [
-                            engine.decide(credential, now, action, resource)["allow"]
-                            for engine in engines
-                        ]
-                        observed.append(
+                        contexts.append(
                             {
                                 "subject": subject,
                                 "mfa_fresh": mfa,
                                 "action": action,
                                 "resource": resource,
-                                "baseline_allow": old,
-                                "candidate_allow": new,
                             }
                         )
+                        requests.append((credential, now, action, resource))
+        before_decisions, after_decisions = [
+            engine.decide_many(requests) for engine in engines
+        ]
+        if time.monotonic() - started > 120:
+            raise Rejected("review_time_bound")
+        for context, old, new in zip(
+            contexts, before_decisions, after_decisions, strict=True
+        ):
+            observed.append(
+                {
+                    **context,
+                    "baseline_allow": old["allow"],
+                    "candidate_allow": new["allow"],
+                }
+            )
     gains = [
         row for row in observed if row["candidate_allow"] and not row["baseline_allow"]
     ]
@@ -245,6 +257,7 @@ def compare(baseline: Path, candidate: Path, now: int) -> dict[str, Any]:
         ).hexdigest(),
         "contexts_evaluated": len(observed),
         "native_decisions": len(observed) * 2,
+        "native_process_invocations": 2,
         "permission_gains": gains,
         "permission_losses": losses,
         "candidate_entitlements": [row for row in observed if row["candidate_allow"]],

@@ -13,3 +13,9 @@ Author: Jason Stys. Critical identity/policy boundaries are verified with real l
 Case counts and coverage percentages measure specific layers, not complete IAM/MFA/ASVS assurance. Expect-deny tests count as passing only when actual denial occurs. Durations are diagnostic; randomized tokens/OS/process startup make whole report hashes vary between runs, while canonicalizing identical evidence produces identical bytes. The report hash is not a signature.
 
 [Measured validation](reports/validation.md) records source hashes, exact counts, platforms, resolved failures and limitations. Reproduce with README/runbook and all gates after any policy/code change.
+
+## Native acceptance and batching equivalence
+
+The actual single-request API and new batch API evaluate all 256 baseline/candidate policy decisions through genuine native OPA and every Ed25519 verification. A differential test records actual process counts (256 versus two) and diagnostic timings without asserting a flaky speed threshold. Separate independent malformed/count/index/order/nonzero/timeout/duplicate JSON controls refuse partial success. The unchanged 31 original absolute expected decisions and four-gain/three-loss comparison oracle remain. Expiry uses a previously valid two-minute token, so zero lifetime cannot substitute for expiration.
+
+The separate Windows job builds patched CPython3.14.10/Tk and official pinned OPA into the full portable and drives nine actual GUI workflows plus a second-process exact reopen. Real file selection, custom-registry mismatch, all active controls at980×700, exact export, invalid-input retention, accessible bundled notices and normal PID exits are required. Failed profiles stay private instead of cleanup beneath an active process; existing55/80/120-second deadlines are not increased. Native packaging does not establish Mac/Linux installers or vulnerability clearance. See the [dated report](reports/native-workbench-2026-11-10.md).

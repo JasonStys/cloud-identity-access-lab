@@ -19,3 +19,9 @@ __pycache__/
 *.tfplan
 test-results/
 playwright-report/
+
+# Jason Stys: private portable candidates and generated packaging metadata.
+release/
+*.spec
+*.sqlite*
+*.db*

@@ -1,92 +1,74 @@
 # Jason Stys: native identity/policy/IaC/browser checks, no cloud privileges, artifacts or Actions caches.
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# parameter: name — line 109
-# parameter: on — line 110
-# parameter: push — line 111
-# parameter: branches — line 112
-# parameter: pull_request — line 113
-# parameter: workflow_dispatch — line 114
-# parameter: permissions — line 115
-# parameter: contents — line 116
-# parameter: concurrency — line 117
-# parameter: group — line 118
-# parameter: cancel-in-progress — line 119
-# parameter: jobs — line 120
-# parameter: quality — line 121
-# parameter: name — line 122
-# parameter: runs-on — line 123
-# parameter: timeout-minutes — line 124
-# parameter: strategy — line 125
-# parameter: fail-fast — line 126
-# parameter: matrix — line 127
-# parameter: include — line 128
-# parameter: steps — line 133
-# parameter: uses — line 134
-# parameter: with — line 135
-# parameter: persist-credentials — line 136
-# parameter: uses — line 137
-# parameter: with — line 138
-# parameter: python-version — line 139
-# parameter: uses — line 140
-# parameter: with — line 141
-# parameter: node-version — line 142
-# parameter: package-manager-cache — line 143
-# parameter: run — line 144
-# parameter: run — line 145
-# parameter: run — line 146
-# parameter: run — line 147
-# parameter: shell — line 148
-# parameter: run — line 149
-# parameter: native — line 150
-# parameter: name — line 151
-# parameter: runs-on — line 152
-# parameter: timeout-minutes — line 153
-# parameter: strategy — line 154
-# parameter: fail-fast — line 155
-# parameter: matrix — line 156
-# parameter: os — line 157
-# parameter: steps — line 158
-# parameter: uses — line 159
-# parameter: with — line 160
-# parameter: persist-credentials — line 161
-# parameter: uses — line 162
-# parameter: with — line 163
-# parameter: python-version — line 164
+# parameter: name — line 127
+# parameter: on — line 128
+# parameter: push — line 129
+# parameter: branches — line 130
+# parameter: pull_request — line 131
+# parameter: workflow_dispatch — line 132
+# parameter: permissions — line 133
+# parameter: contents — line 134
+# parameter: concurrency — line 135
+# parameter: group — line 136
+# parameter: cancel-in-progress — line 137
+# parameter: jobs — line 138
+# parameter: quality — line 139
+# parameter: name — line 140
+# parameter: runs-on — line 141
+# parameter: timeout-minutes — line 142
+# parameter: strategy — line 143
+# parameter: fail-fast — line 144
+# parameter: matrix — line 145
+# parameter: include — line 146
+# parameter: steps — line 151
+# parameter: uses — line 152
+# parameter: with — line 153
+# parameter: persist-credentials — line 154
+# parameter: uses — line 155
+# parameter: with — line 156
+# parameter: python-version — line 157
+# parameter: uses — line 158
+# parameter: with — line 159
+# parameter: node-version — line 160
+# parameter: package-manager-cache — line 161
+# parameter: name — line 162
+# parameter: if — line 163
+# parameter: run — line 164
 # parameter: run — line 165
 # parameter: run — line 166
 # parameter: run — line 167
-# parameter: shell — line 168
-# parameter: run — line 169
-# variable: RUNNER_OS — line 171
-# variable: suffix — line 172
-# variable: suffix — line 173
-# variable: suffix — line 174
-# variable: suffix — line 175
-# variable: suffix — line 176
-# variable: suffix — line 177
-# variable: suffix — line 178
-# parameter: browser — line 179
-# parameter: name — line 180
-# parameter: runs-on — line 181
-# parameter: timeout-minutes — line 182
-# parameter: steps — line 183
-# parameter: uses — line 184
-# parameter: with — line 185
-# parameter: persist-credentials — line 186
-# parameter: uses — line 187
-# parameter: with — line 188
-# parameter: python-version — line 189
-# parameter: uses — line 190
-# parameter: with — line 191
-# parameter: node-version — line 192
-# parameter: package-manager-cache — line 193
-# parameter: run — line 194
-# parameter: run — line 195
-# parameter: run — line 196
-# parameter: run — line 197
-# parameter: run — line 198
-# parameter: run — line 199
-# parameter: security — line 200
+# parameter: run — line 168
+# parameter: shell — line 169
+# parameter: run — line 170
+# parameter: native — line 171
+# parameter: name — line 172
+# parameter: runs-on — line 173
+# parameter: timeout-minutes — line 174
+# parameter: strategy — line 175
+# parameter: fail-fast — line 176
+# parameter: matrix — line 177
+# parameter: os — line 178
+# parameter: steps — line 179
+# parameter: uses — line 180
+# parameter: with — line 181
+# parameter: persist-credentials — line 182
+# parameter: uses — line 183
+# parameter: with — line 184
+# parameter: python-version — line 185
+# parameter: run — line 186
+# parameter: run — line 187
+# parameter: run — line 188
+# parameter: shell — line 189
+# parameter: run — line 190
+# variable: RUNNER_OS — line 192
+# variable: suffix — line 193
+# variable: suffix — line 194
+# variable: suffix — line 195
+# variable: suffix — line 196
+# variable: suffix — line 197
+# variable: suffix — line 198
+# variable: suffix — line 199
+# parameter: browser — line 200
 # parameter: name — line 201
 # parameter: runs-on — line 202
 # parameter: timeout-minutes — line 203
@@ -94,17 +76,53 @@
 # parameter: uses — line 205
 # parameter: with — line 206
 # parameter: persist-credentials — line 207
-# parameter: fetch-depth — line 208
-# parameter: uses — line 209
-# parameter: with — line 210
-# parameter: python-version — line 211
-# parameter: uses — line 212
-# parameter: with — line 213
-# parameter: node-version — line 214
-# parameter: package-manager-cache — line 215
+# parameter: uses — line 208
+# parameter: with — line 209
+# parameter: python-version — line 210
+# parameter: uses — line 211
+# parameter: with — line 212
+# parameter: node-version — line 213
+# parameter: package-manager-cache — line 214
+# parameter: run — line 215
 # parameter: run — line 216
 # parameter: run — line 217
 # parameter: run — line 218
+# parameter: run — line 219
+# parameter: run — line 220
+# parameter: security — line 221
+# parameter: name — line 222
+# parameter: runs-on — line 223
+# parameter: timeout-minutes — line 224
+# parameter: steps — line 225
+# parameter: uses — line 226
+# parameter: with — line 227
+# parameter: persist-credentials — line 228
+# parameter: fetch-depth — line 229
+# parameter: uses — line 230
+# parameter: with — line 231
+# parameter: python-version — line 232
+# parameter: uses — line 233
+# parameter: with — line 234
+# parameter: node-version — line 235
+# parameter: package-manager-cache — line 236
+# parameter: run — line 237
+# parameter: run — line 238
+# parameter: run — line 239
+# parameter: native-windows — line 248
+# parameter: name — line 249
+# parameter: runs-on — line 250
+# parameter: timeout-minutes — line 251
+# parameter: steps — line 252
+# parameter: uses — line 253
+# parameter: with — line 254
+# parameter: persist-credentials — line 255
+# parameter: uses — line 256
+# parameter: with — line 257
+# parameter: python-version — line 258
+# parameter: name — line 259
+# parameter: run — line 260
+# parameter: name — line 264
+# parameter: run — line 265
 # END CODE MAP
 name: Validate
 on:
@@ -141,6 +159,9 @@ jobs:
         with:
           node-version: '24.21.0'
           package-manager-cache: false
+      - name: Source Tk imports on disposable Linux worker
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libtk8.6
       - run: python -m pip install --require-hashes -r requirements-dev.lock
       - run: python -m cial.tooling opa
       - run: npm ci --ignore-scripts
@@ -223,3 +244,24 @@ jobs:
           .tools/gitleaks git . --redact --no-banner
           .tools/actionlint
           shellcheck scripts/validate.sh
+
+  native-windows:
+    name: Native Windows portable / patched Python3.14.10
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14.10'
+      - name: Exact complete Python/native graph and genuine pinned OPA
+        run: |
+          python -m pip install --require-hashes -r requirements-dev.lock -r requirements-native.lock
+          python -m pip_audit -r requirements-dev.lock -r requirements-native.lock --disable-pip --no-deps
+          python -m cial.tooling opa
+      - name: Complete real native app and two-process signature/policy journey
+        run: |
+          python scripts/build_native.py
+          python scripts/test_native_app.py

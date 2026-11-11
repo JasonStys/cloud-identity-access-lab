@@ -27,3 +27,7 @@ The UI is a read-only evidence viewer, not a login or privilege editor. Missing 
 ## Revisit before real deployment
 
 Approved managed provider and access-token profile; stable issuer/discovery/JWKS pin/rotation; phishing-resistant MFA enrollment and attestation; explicit workload trust/issuer/audience; protected GitHub environments; trusted clock and HTTPS; durable distributed revocation with consistency model; audit privacy/retention; cloud policy validation against all relevant AWS IAM interactions; resource enforcement and rollback. Merely changing a bind address is not deployment readiness.
+
+## Native workbench and indexed policy batches
+
+The Tk app uses one retained worker and the original cryptographic/OPA/review engines. Inputs are local closed-schema synthetic data, never arbitrary Rego/queries/programs. The fixed indexed array comprehension evaluates all verified contexts in two native invocations per registry pair; every token is still individually verified. Exact counts/order/indexes/schema and original boolean/reason agreement fail closed, with unchanged process/review budgets. An owner-local marked/locked SQLite profile retains only actual metadata/output bundles; keys/tokens/claims remain in memory. Normal Exit drains the owned worker; source browser/CLI and provider-free HCL remain separate supported interfaces. See [native usage](native-workbench.md).
