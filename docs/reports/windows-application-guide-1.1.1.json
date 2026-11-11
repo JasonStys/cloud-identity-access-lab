@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "repository": "cloud-identity-access-lab",
+  "runtimeVersion": "1.1.1",
+  "runtimeSource": "5f3b7c262174d814dcccdfe3c614c4aad74edc8f",
+  "createdAt": "2026-11-11T09:40:38.015Z",
+  "author": "Jason Stys",
+  "document": "windows-application-guide-1.1.1.docx",
+  "sha256": "82ad063c046e5b7045dfb6a7d4028aa2c0fd89b67b525d89e4f4b176b0121828",
+  "screenshots": [
+    {
+      "file": "selected-evidence.png",
+      "sha256": "8622f739da7c553b8a4a6a770250a62465d9ae84bc1a545fcd587fea80fafc3e",
+      "width": 1276,
+      "height": 899,
+      "caption": "The actual installed workbench shows engineer-alpha's allowed publish request, fresh issuer MFA assertion and matching independent expectation."
+    },
+    {
+      "file": "owner-unknown-review.png",
+      "sha256": "dd9b0d7c4ed14d6022f197afdc44f66d15d2fdd5ef904c8273fe2314bc4c2a41",
+      "width": 1276,
+      "height": 899,
+      "caption": "The same installed app retains four permission gains and three losses across 128 signed contexts; the selected gain preserves its original reason and the candidate is not applied."
+    }
+  ],
+  "snippets": [
+    {
+      "file": "cial/desktop_state.py",
+      "first": 233,
+      "last": 245,
+      "sha256": "4160443af1ead283829ef52661c960f04f8a3eb90cbff69fc38bda42e5aacb52",
+      "url": "https://github.com/JasonStys/cloud-identity-access-lab/blob/5f3b7c262174d814dcccdfe3c614c4aad74edc8f/cial/desktop_state.py#L233"
+    }
+  ],
+  "observedTests": [
+    {
+      "name": "Actual installed workflows",
+      "observed": "Full original domain, review and export controls passed two normal native launches; all 9 saved bundles retained exact original bytes.",
+      "result": "Passed"
+    },
+    {
+      "name": "Old-to-new profile",
+      "observed": "The actual installed 1.1.0 app created a synthetic profile; installed 1.1.1 reopened it and retained all 9 exact bundles without reset.",
+      "result": "Passed"
+    },
+    {
+      "name": "Source and distribution",
+      "observed": "Exact-main workflows and processed CodeQL passed with zero open main alerts. Five downloaded assets and installed files matched their verified SHA-256 identities.",
+      "result": "Verified"
+    },
+    {
+      "name": "PC and links",
+      "observed": "Existing links were backed up and retargeted with settings retained. Normal profiles and Docker were unchanged; default-profile shortcut activation remains separately untested.",
+      "result": "Verified"
+    }
+  ],
+  "visualReview": {
+    "approved": true,
+    "ooxmlSchema": "passed",
+    "pages": [
+      {
+        "page": 1,
+        "sha256": "0b9b6240bc1688b8a83fd3454d127ec8473e384deaa6debd80a651cfa4d5325e",
+        "approved": true,
+        "method": "Individually inspected final page content"
+      },
+      {
+        "page": 2,
+        "sha256": "36fd90666893ef2d813078dd277ddc78b7493626f3a9fbb5219c9096d1afbdfe",
+        "approved": true,
+        "method": "Individually inspected final page content"
+      },
+      {
+        "page": 3,
+        "sha256": "8e3bf3140a81470ec0991f751674a59eeb06ac880365ee3402c56d017bc34ca7",
+        "approved": true,
+        "method": "Individually inspected final page content"
+      },
+      {
+        "page": 4,
+        "sha256": "a686e6b55dee30b05f5fb746e0ace5becd0d2febee7bed3b8bc3f987b0a29e04",
+        "approved": true,
+        "method": "Individually inspected final page content"
+      }
+    ],
+    "checkedUtc": "2026-11-11T10:23:12.475544+00:00",
+    "method": "All final page content individually inspected by root or named peers; only exact pixel identity carries prior individual inspection."
+  }
+}

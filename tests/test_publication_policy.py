@@ -1,41 +1,43 @@
 """Jason Stys: independent real-ZIP publication privacy boundary and unknown-file rejection regressions."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: write_document — line 49
-# parameter: content — line 50
-# parameter: extra — line 50
-# parameter: root — line 50
-# variable: path — line 53
-# variable: package — line 55
-# variable: name — line 59
-# variable: value — line 59
-# definition: test_actual_word_xml_and_relationships_remain_inspected — line 64
-# parameter: monkeypatch — line 64
-# parameter: tmp_path — line 64
-# variable: path — line 67
-# variable: result — line 70
-# definition: test_actual_main_still_rejects_credentials_in_word_parts — line 76
-# parameter: monkeypatch — line 77
-# parameter: part — line 77
-# parameter: tmp_path — line 77
-# variable: token — line 80
-# parameter: args — line 93
-# parameter: kwargs — line 93
-# definition: test_only_exact_reviewed_filename_receives_office_handling — line 99
-# parameter: monkeypatch — line 99
-# parameter: tmp_path — line 99
-# variable: path — line 102
-# variable: unknown — line 103
-# variable: source — line 107
-# definition: test_unsupported_or_unbounded_real_packages_fail — line 116
-# parameter: defect — line 116
-# parameter: monkeypatch — line 116
-# parameter: tmp_path — line 116
-# variable: extras — line 119
+# definition: write_document — line 51
+# parameter: content — line 52
+# parameter: extra — line 52
+# parameter: root — line 52
+# variable: path — line 55
+# variable: package — line 57
+# variable: name — line 61
+# variable: value — line 61
+# definition: test_actual_word_xml_and_relationships_remain_inspected — line 69
+# parameter: filename — line 70
+# parameter: monkeypatch — line 70
+# parameter: tmp_path — line 70
+# variable: path — line 74
+# variable: path — line 77
+# variable: result — line 78
+# definition: test_actual_main_still_rejects_credentials_in_word_parts — line 84
+# parameter: monkeypatch — line 85
+# parameter: part — line 85
+# parameter: tmp_path — line 85
+# variable: token — line 88
+# parameter: args — line 101
+# parameter: kwargs — line 101
+# definition: test_only_exact_reviewed_filename_receives_office_handling — line 107
+# parameter: monkeypatch — line 107
+# parameter: tmp_path — line 107
+# variable: path — line 110
+# variable: unknown — line 111
+# variable: source — line 115
+# definition: test_unsupported_or_unbounded_real_packages_fail — line 124
+# parameter: defect — line 124
+# parameter: monkeypatch — line 124
+# parameter: tmp_path — line 124
 # variable: extras — line 127
-# variable: i — line 127
-# variable: path — line 128
-# variable: package — line 130
-# variable: package — line 135
+# variable: extras — line 135
+# variable: i — line 135
+# variable: path — line 136
+# variable: package — line 138
+# variable: package — line 143
 # END CODE MAP
 
 from pathlib import Path
@@ -61,12 +63,18 @@ def write_document(
     return path
 
 
-def test_actual_word_xml_and_relationships_remain_inspected(tmp_path, monkeypatch):
+@pytest.mark.parametrize(
+    "filename", ["project-guide.docx", "windows-application-guide-1.1.1.docx"]
+)
+def test_actual_word_xml_and_relationships_remain_inspected(
+    tmp_path, monkeypatch, filename
+):
     """A real ZIP yields its XML and relationship text, not a metadata placeholder."""
     monkeypatch.setattr(policy, "ROOT", tmp_path)
     path = write_document(
         tmp_path, "<document>Read the scoped source evidence.</document>"
     )
+    path = path.rename(path.with_name(filename))
     result = policy.public_text(path)
     assert "Read the scoped source evidence." in result
     assert "<Relationships/>" in result and "<Types/>" in result

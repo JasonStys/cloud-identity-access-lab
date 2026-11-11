@@ -4,22 +4,22 @@
 # variable: BEGIN — line 31
 # variable: END — line 31
 # variable: SPECIAL — line 32
-# definition: purpose — line 63
-# parameter: name — line 63
-# variable: text — line 67
-# variable: line — line 79
-# variable: line — line 88
-# definition: main — line 94
-# variable: parser — line 96
-# variable: args — line 98
-# variable: names — line 99
-# variable: rows — line 107
-# variable: name — line 108
-# variable: path — line 118
-# variable: original — line 119
-# variable: end — line 120
-# variable: start — line 120
-# variable: expected — line 121
+# definition: purpose — line 65
+# parameter: name — line 65
+# variable: text — line 69
+# variable: line — line 81
+# variable: line — line 90
+# definition: main — line 96
+# variable: parser — line 98
+# variable: args — line 100
+# variable: names — line 101
+# variable: rows — line 109
+# variable: name — line 110
+# variable: path — line 120
+# variable: original — line 121
+# variable: end — line 122
+# variable: start — line 122
+# variable: expected — line 123
 # END CODE MAP
 
 import argparse
@@ -30,6 +30,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "docs/reports/windows-application-guide-1.1.1.docx": "Reviewed current 1.1.1 installed-app guide: actual screenshots, workflow, immutable code and measured limits.",
+    "docs/reports/windows-application-guide-1.1.1.json": "Current Word, screenshot, source and individually reviewed rendered-page hashes.",
     "requirements-native.lock": "Exact hash-locked Windows native build tools; no first-launch downloads.",
     "examples/desktop/proposed-registry.json": "Fictional tenant move and publisher removal, evaluated as data without applying grants.",
     "licenses/OPA-LICENSE.txt": "Unmodified official OPA Apache2 license text at verified1.22.3.",
