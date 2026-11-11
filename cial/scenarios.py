@@ -1,30 +1,31 @@
 """Jason Stys: real signed-credential and OPA conformance scenarios; outcomes are observed, not canned success."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: NOW — line 41
-# variable: WORKLOAD — line 42
-# definition: run — line 45
-# variable: issuer — line 47
-# variable: verifier — line 48
-# variable: engine — line 49
-# variable: rows — line 50
-# definition: check — line 52
-# parameter: identifier — line 53
-# parameter: title — line 54
-# parameter: subject — line 55
-# parameter: action — line 56
-# parameter: resource — line 57
-# parameter: expected — line 58
-# parameter: now — line 60
-# parameter: token — line 61
-# parameter: mfa — line 62
-# parameter: claims — line 63
-# variable: credential — line 66
-# variable: started — line 71
-# variable: result — line 72
-# variable: first — line 288
-# variable: peer — line 289
-# variable: source — line 365
-# variable: source — line 373
+# variable: NOW — line 42
+# variable: WORKLOAD — line 43
+# definition: run — line 46
+# parameter: source — line 46
+# variable: issuer — line 48
+# variable: verifier — line 49
+# variable: engine — line 50
+# variable: rows — line 51
+# definition: check — line 53
+# parameter: identifier — line 54
+# parameter: title — line 55
+# parameter: subject — line 56
+# parameter: action — line 57
+# parameter: resource — line 58
+# parameter: expected — line 59
+# parameter: now — line 61
+# parameter: token — line 62
+# parameter: mfa — line 63
+# parameter: claims — line 64
+# variable: credential — line 67
+# variable: started — line 72
+# variable: result — line 73
+# variable: first — line 292
+# variable: peer — line 293
+# variable: source — line 370
+# variable: source — line 378
 # END CODE MAP
 
 from __future__ import annotations
@@ -42,7 +43,7 @@ NOW = 2000000000
 WORKLOAD = "repo:synthetic-org@101/synthetic-release@202:ref:refs/heads/main"
 
 
-def run() -> dict[str, Any]:
+def run(source: str | None = None) -> dict[str, Any]:
     """Use fresh in-memory issuer keys and actual native Rego decisions for this deterministic clocked matrix."""
     issuer = FixtureIssuer()
     verifier = Verifier(issuer.public_key)
@@ -239,6 +240,9 @@ def run() -> dict[str, Any]:
         "alpha-docs",
         False,
         exp=NOW,
+        iat=NOW - 120,
+        nbf=NOW - 120,
+        auth_time=NOW - 120,
     )
     check(
         "T-NOT-YET",
@@ -361,14 +365,15 @@ def run() -> dict[str, Any]:
         False,
         now=NOW + 59,
     )
-    try:
-        source = (
-            subprocess.check_output(
-                ["git", "rev-parse", "HEAD"], cwd=ROOT, stderr=subprocess.DEVNULL
+    if source is None:
+        try:
+            source = (
+                subprocess.check_output(
+                    ["git", "rev-parse", "HEAD"], cwd=ROOT, stderr=subprocess.DEVNULL
+                )
+                .decode()
+                .strip()
             )
-            .decode()
-            .strip()
-        )
-    except subprocess.CalledProcessError:
-        source = "uncommitted"
+        except (OSError, subprocess.CalledProcessError):
+            source = "uncommitted"
     return validate({"schema": 1, "synthetic": True, "source": source, "cases": rows})

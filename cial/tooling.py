@@ -1,39 +1,39 @@
 """Jason Stys: verify and install fixed official native tools; never execute arbitrary caller-selected programs."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: ROOT — line 54
-# definition: metadata — line 57
-# parameter: name — line 57
-# variable: system — line 64
-# variable: lock — line 65
-# variable: item — line 68
-# variable: prefix — line 69
-# variable: executable — line 76
-# definition: executable — line 80
-# parameter: name — line 80
-# variable: item — line 82
-# variable: target — line 82
-# variable: installed — line 85
-# variable: correct — line 87
-# variable: archive — line 89
-# variable: zipped — line 99
-# variable: correct — line 100
-# definition: install — line 106
-# parameter: name — line 106
-# variable: item — line 108
-# variable: target — line 108
-# variable: folder — line 112
-# variable: archive — line 113
-# variable: digest — line 114
-# variable: total — line 115
-# variable: response — line 117
-# variable: output — line 118
-# variable: chunk — line 120
-# variable: total — line 121
-# variable: candidate — line 128
-# variable: zipped — line 130
-# variable: info — line 131
-# definition: main — line 143
-# variable: parser — line 145
+# variable: ROOT — line 55
+# definition: metadata — line 58
+# parameter: name — line 58
+# variable: system — line 65
+# variable: lock — line 66
+# variable: item — line 69
+# variable: prefix — line 70
+# variable: executable — line 77
+# definition: executable — line 81
+# parameter: name — line 81
+# variable: item — line 83
+# variable: target — line 83
+# variable: installed — line 86
+# variable: correct — line 88
+# variable: archive — line 90
+# variable: zipped — line 100
+# variable: correct — line 101
+# definition: install — line 107
+# parameter: name — line 107
+# variable: item — line 109
+# variable: target — line 109
+# variable: folder — line 113
+# variable: archive — line 114
+# variable: digest — line 115
+# variable: total — line 116
+# variable: response — line 118
+# variable: output — line 119
+# variable: chunk — line 121
+# variable: total — line 122
+# variable: candidate — line 129
+# variable: zipped — line 131
+# variable: info — line 132
+# definition: main — line 144
+# variable: parser — line 146
 # END CODE MAP
 
 from __future__ import annotations
@@ -50,6 +50,7 @@ from pathlib import Path
 from typing import Any
 
 from .identity import Rejected
+from .inputs import file_hash, read_source
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -82,9 +83,9 @@ def executable(name: str) -> Path:
     target, item = metadata(name)
     if target.is_symlink() or target.is_junction() or not target.is_file():
         raise Rejected("tool_not_installed")
-    installed = target.read_bytes()
+    installed = read_source(target, 128 * 1024 * 1024) if name == "terraform" else None
     if name == "opa":
-        correct = hashlib.sha256(installed).hexdigest() == item["sha256"]
+        correct = file_hash(target, 128 * 1024 * 1024) == item["sha256"]
     else:
         archive = target.with_suffix(".zip")
         if (

@@ -4,22 +4,22 @@
 # variable: BEGIN — line 31
 # variable: END — line 31
 # variable: SPECIAL — line 32
-# definition: purpose — line 57
-# parameter: name — line 57
-# variable: text — line 61
-# variable: line — line 73
-# variable: line — line 82
-# definition: main — line 88
-# variable: parser — line 90
-# variable: args — line 92
-# variable: names — line 93
-# variable: rows — line 101
-# variable: name — line 102
-# variable: path — line 112
-# variable: original — line 113
-# variable: end — line 114
-# variable: start — line 114
-# variable: expected — line 115
+# definition: purpose — line 63
+# parameter: name — line 63
+# variable: text — line 67
+# variable: line — line 79
+# variable: line — line 88
+# definition: main — line 94
+# variable: parser — line 96
+# variable: args — line 98
+# variable: names — line 99
+# variable: rows — line 107
+# variable: name — line 108
+# variable: path — line 118
+# variable: original — line 119
+# variable: end — line 120
+# variable: start — line 120
+# variable: expected — line 121
 # END CODE MAP
 
 import argparse
@@ -30,6 +30,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "requirements-native.lock": "Exact hash-locked Windows native build tools; no first-launch downloads.",
+    "examples/desktop/proposed-registry.json": "Fictional tenant move and publisher removal, evaluated as data without applying grants.",
+    "licenses/OPA-LICENSE.txt": "Unmodified official OPA Apache2 license text at verified1.22.3.",
+    "licenses/GO-LICENSE.txt": "Unmodified official Go1.27.3 runtime BSD license.",
+    "licenses/OPA-THIRD-PARTY.txt": "Actual84linked Go module copyright/license texts from exact-version official mirrors or immutable source commit.",
+    "licenses/opa-linked-modules.txt": "Public module/version/sum inventory extracted from the SHA-bound official Windows OPA binary; no host/build paths.",
     "docs/reports/project-guide.docx": "Reviewed Word project guide bound to the documented source revision.",
     "docs/reports/publications.json": "Exact Office digests, visual review scopes and immutable source baselines.",
     "policy/registry.json": "Authoritative synthetic principal/resource/emergency registry; no real identities.",
