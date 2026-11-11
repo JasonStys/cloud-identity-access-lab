@@ -3,29 +3,29 @@
 # variable: ROOT — line 37
 # definition: public_text — line 40
 # parameter: path — line 40
-# variable: package — line 44
-# variable: members — line 45
-# variable: member — line 46
-# variable: names — line 46
-# variable: member — line 50
-# variable: item — line 55
-# variable: inspected — line 59
-# variable: member — line 60
-# variable: member — line 62
-# variable: member — line 66
-# definition: main — line 69
-# variable: names — line 71
-# variable: name — line 78
-# variable: path — line 79
-# variable: text — line 85
-# variable: target — line 90
-# variable: action — line 96
-# variable: word — line 100
-# variable: frontend — line 115
-# variable: word — line 118
-# variable: lock — line 120
-# variable: item — line 121
-# variable: name — line 121
+# variable: package — line 47
+# variable: members — line 48
+# variable: member — line 49
+# variable: names — line 49
+# variable: member — line 53
+# variable: item — line 58
+# variable: inspected — line 62
+# variable: member — line 63
+# variable: member — line 65
+# variable: member — line 69
+# definition: main — line 72
+# variable: names — line 74
+# variable: name — line 81
+# variable: path — line 82
+# variable: text — line 88
+# variable: target — line 93
+# variable: action — line 99
+# variable: word — line 103
+# variable: frontend — line 118
+# variable: word — line 121
+# variable: lock — line 123
+# variable: item — line 124
+# variable: name — line 124
 # END CODE MAP
 
 import json
@@ -38,8 +38,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def public_text(path: Path) -> str:
-    """Inspect all XML/relationships in the one authored Word path; unknown binary files still fail closed."""
-    if path.relative_to(ROOT).as_posix() != "docs/reports/project-guide.docx":
+    """Inspect XML/relationships in exact reviewed Word editions; unknown binary files still fail closed."""
+    if path.relative_to(ROOT).as_posix() not in {
+        "docs/reports/project-guide.docx",
+        "docs/reports/windows-application-guide-1.1.1.docx",
+    }:
         return path.read_text(encoding="utf-8")
     with ZipFile(path) as package:
         members = package.infolist()
